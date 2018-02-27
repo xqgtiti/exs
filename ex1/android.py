@@ -489,7 +489,12 @@ def getp_pkg():
         print i[1]
         fsave.write(json.dumps(i[1], ensure_ascii=False) + '\n')
 if __name__ == "__main__":
-    getp_apk()
+
+    a = APK('D:\Bwork\ontry\PUMA-master//Lazada Online Shopping Deals_v6.0.3_apkpure.com.apk')
+    print a.get_package()
+    #print a.get_AndroidManifest()
+
+    #getp_apk()
     #getp_pkg()
     #a = APK('D:\Ubicomp\EX1//meipian.apk')
     #print a.get_main_activity()

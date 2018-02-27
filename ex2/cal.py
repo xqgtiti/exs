@@ -1,15 +1,20 @@
 
 import json
 import os
-LIB = ['android/support/v4/',
-       'org/apache/http/',
-       'com/google/gson/',
-       'com/google/zxing/'
 
-       ]
 
 
 def get_lib_size(output_dir, apk_dir):
+    LIB = [  #
+        'android/support/',
+        'android/webkit/',
+        'org/apache/http/',
+        'com/google/gson/',
+        'com/google/zxing/',
+        'uk/co/senab/',
+        'okhttp3',
+        'mtopsdk'
+    ]
     apk_dir = 'D:\Ubicomp\EX2//fuyou3.0.3//classes-dex2jar'
     f = open('ans.txt', 'rb')
     r = f.read()
@@ -18,7 +23,9 @@ def get_lib_size(output_dir, apk_dir):
     for item in res:
         path = item['cpn']
         library_path.append(path)
+    library_path.extend(LIB)
 
+    print json.dumps(library_path,ensure_ascii=False,indent=4)
     no_lib_size = 0
     total_size = 0
     for root, dirs, files in os.walk(apk_dir, 'rb'):
@@ -26,6 +33,7 @@ def get_lib_size(output_dir, apk_dir):
             file_path = os.path.join(root, file)
             total_size = total_size + os.path.getsize(file_path)
             flag = False
+
             for libs in library_path:
                 file_path_change = file_path.replace('\\', '/')
                 if libs in file_path_change:
@@ -40,7 +48,7 @@ def get_lib_size(output_dir, apk_dir):
     return total_size, no_lib_size
 if __name__ == '__main__':
 
-    get_lib_size('ans.txt','D:\Ubicomp\EX2//fuyou3.0.3//classes-dex2jar')
+    #get_lib_size('ans.txt','D:\Ubicomp\EX2//fuyou3.0.3//classes-dex2jar')
     total_size, no_lib_size = get_lib_size('ans.txt','D:\Ubicomp\EX2//fuyou3.0.3//classes-dex2jar')
 
     print total_size, no_lib_size
