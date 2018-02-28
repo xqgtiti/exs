@@ -4,6 +4,9 @@ import os
 import shlex, subprocess
 import re
 import threading
+import time
+import signal
+
 
 def setup_phone():
     os.system('adb shell "rm -rf /data/local/tmp/*"')
@@ -62,16 +65,7 @@ def run(apk_name):
 def slove(apk_name):
 
     get_app_info(apk_name)
-
-
     run(apk_name)
-
-
-def sayhello():
-    print "hello world"
-    global t  # Notice: use global variable!
-    t = threading.Timer(5.0, sayhello)
-    t.start()
 
 if __name__ == '__main__':
 
@@ -82,8 +76,11 @@ if __name__ == '__main__':
     slove("Lazada Online Shopping Deals_v6.0.3_apkpure.com.apk")
     """
 
+    """
     t = threading.Timer(5.0, sayhello)
     t.start()
+    """
+
 
 
 
